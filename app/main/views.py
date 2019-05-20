@@ -5,16 +5,10 @@ from .. import db
 
 @main.route('/', methods=['GET','POST'])
 def index():
-    """
-    尚未结束的停水
-    """
     return 'hello,world'
 
 @main.route('/log', methods=['GET','POST'])
 def test():
-    """
-    尚未结束的停水
-    """
     devices = list(db.devices.find({},{'_id':0}))
     for i,v  in enumerate(db.devices.find({}, {'_id':0})):
         if db.check_log.find_one({'id': v['id']}):

@@ -8,7 +8,6 @@ db.authenticate('root','123456')
 
 def create_app(config_name):  # 注册app的函数
     """
-    注册app的函数
     """
     app = Flask(__name__)
 
