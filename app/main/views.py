@@ -23,5 +23,5 @@ def test():
 def check():
     print(request.data)
     id = request.data['id']
-    db.check_log.insert_one({'id': id, 'date': datetime.now(), 'user': 'ww'})
+    db.check_log.insert_one({'id': int(id), 'date': datetime.now(), 'user': 'ww'})
     return jsonify({'message': 'ok'})
