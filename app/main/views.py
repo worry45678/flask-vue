@@ -23,5 +23,6 @@ def test():
 def check():
     params = json.loads(request.data.decode('utf-8'))
     id = params['id']
+    print(id)
     db.check_log.insert_one({'id': int(id), 'date': datetime.now(), 'user': 'ww'})
     return jsonify({'message': 'ok'})
