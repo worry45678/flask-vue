@@ -15,10 +15,10 @@ def test():
     for i,v  in enumerate(db.devices.find({}, {'_id':0})):
         if db.check_log.find_one({'id': v['id'],'date':{'$gt': datetime(now.year, now.month, now.day)}}):
             devices[i]['isCheck'] = True
-            devices[i]['date'] = db.check_log.find_one({'id': v['id'],'date':{'$gt': datetime(now.year, now.month, now.day)}})['date'].strftime('%Y-%m-%d %H:%M:%S')
+            devices[i]['date'] = db.check_log.find_one({'id': v['id'],'date':{'$gt': datetime(now.year, now.month, now.day)}})['date'].strftime('%H:%M')
         else:
             devices[i]['isCheck'] = False
-            devices[i]['date'] = None
+            devices[i]['date'] = '待检查'
     return jsonify({'data': devices})
 
 @main.route('/check', methods=['POST'])
