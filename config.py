@@ -1,5 +1,5 @@
 import os
-from pyecharts import Style
+
 BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
 
