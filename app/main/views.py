@@ -21,7 +21,7 @@ def test():
 
 @main.route('/check', methods=['POST'])
 def check():
-    params = json.loads(request.data)
+    params = json.loads(request.data.decode('utf-8'))
     id = params['id']
     db.check_log.insert_one({'id': int(id), 'date': datetime.now(), 'user': 'ww'})
     return jsonify({'message': 'ok'})
