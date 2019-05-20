@@ -11,9 +11,10 @@ def index():
 @main.route('/log', methods=['GET','POST'])
 def test():
     devices = list(db.devices.find({},{'_id':0}))
+    now = datetime.now()
     for i,v  in enumerate(db.devices.find({}, {'_id':0})):
         devices[i]['date'] = devices[i]['date'].strftime('%Y-%m-%d %H:%M:%S')
-        if db.check_log.find_one({'id': v['id']}):
+        if db.check_log.find_one({'id': v['id'],'date':{'$gt': datetime(now.year, now.month, now.day)}}):
             devices[i]['isCheck'] = True
         else:
             devices[i]['isCheck'] = False
