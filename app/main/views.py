@@ -1,7 +1,7 @@
 import json
 from . import main
 from datetime import datetime
-from flask import render_template, session, redirect, url_for, request, send_from_directory, jsonify, flash
+from flask import render_template, session, redirect, url_for, request, send_from_directory, jsonify, flash, requests
 from .. import db
 
 @main.route('/', methods=['GET','POST'])
@@ -21,5 +21,7 @@ def test():
 
 @main.route('/check', methods=['POST'])
 def check():
-    db.check_log.insert_one({'id': 1, 'date': datetime.now(), 'user': 'ww'})
+    print(requests.data)
+    id = requests.data['id']
+    db.check_log.insert_one({'id': id, 'date': datetime.now(), 'user': 'ww'})
     return jsonify({'message': 'ok'})
