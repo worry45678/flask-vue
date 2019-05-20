@@ -15,4 +15,4 @@ def test():
             devices[i]['isCheck'] = True
         else:
             devices[i]['isCheck'] = False
-    return jsonify(devices)
+    return jsonify({'data': devices})
