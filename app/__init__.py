@@ -1,16 +1,22 @@
 from flask import Flask
-from config import config
+from app import config
 import pymongo
+from flask_pymongo import PyMongo
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
-client = pymongo.MongoClient(host='39.104.64.142', port=27017)
-db = client.fire
-db.authenticate('root','123456')
+mongo = PyMongo()
+serializer = Serializer(config.SECRET_KEY, expires_in=43200)
 
 def create_app(config_name):  
     """
     """
     app = Flask(__name__)
+    app.config.from_object(config_name)
 
+    mongo.init_app(app)
+    
+    from app.auth import auths
+    app.register_blueprint(auths)
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint) 
